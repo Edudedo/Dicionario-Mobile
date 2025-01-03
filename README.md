@@ -1,87 +1,51 @@
+DICIONÁRIO MOBILE
 
-# Mobile Challenge 20240202
+Este é um aplicativo mobile que permite aos usuários buscar definições de palavras, ouvir suas pronúncias, salvar palavras como favoritas e visualizar o histórico de buscas. Desenvolvido como parte de um desafio técnico para a Coodesh, o projeto foi cuidadosamente estruturado para oferecer uma experiência responsiva, funcional e prática.
 
-## Introdução
+DESCRIÇÃO DO PROJETO:
 
-Este é um teste para que possamos ver as suas habilidades como Mobile Developer.
+O Dicionário Mobile é um aplicativo que permite ao usuário acessar uma imensa lista de palavras, oferecendo:
 
-Nesse desafio você deverá desenvolver um aplicativo para listar palavras em inglês, utilizando como base a API [Free Dictionary API](https://dictionaryapi.dev/). O projeto a ser desenvolvido por você tem como objetivo exibir termos em inglês e gerenciar as palavras visualizadas, conforme indicado nos casos de uso que estão logo abaixo.
+Definição: Definições detalhadas, fonéticas e exemplos de uso.
+Áudio integrado: Escute a pronúncia correta das palavras.
+Favoritos: Funcionalidade para você salvar palavras desejadas como favoritas.
+Histórico: Veja as palavras que você pesquisou recentemente.
+Interface simples e intuitiva: Desenvolvido com foco no usuário, o design é responsivo e fácil de navegar.
 
-[SPOILER] As instruções de entrega e apresentação do challenge estão no final deste Readme (=
+TECNOLOGIAS UTILIZADAS NO PROJETO:
 
-### Antes de começar
- 
-- Considere como deadline da avaliação a partir do início do teste. Caso tenha sido convidado a realizar o teste e não seja possível concluir dentro deste período, avise a pessoa que o convidou para receber instruções sobre o que fazer.
-- Documentar todo o processo de investigação para o desenvolvimento da atividade (README.md no seu repositório); os resultados destas tarefas são tão importantes do que o seu processo de pensamento e decisões à medida que as completa, por isso tente documentar e apresentar os seus hipóteses e decisões na medida do possível.
+Linguagem: 
+-TypeScript
 
-### Instruções iniciais obrigatórias
+Frameworks e Bibliotecas:
+- React Native (Expo)
+- Gluesstack V2 (Estilização e UI)
+- Axio (API)
 
-- Utilize as seguintes tecnologias:
+APIs Externas:
 
-#### Tecnologias (Mobile):
-- Nativo ou Hibrido (Flutter, Ionic, React Native, etc)
-- Estilização (Material, Semantic, etc). Ou escrever o seu próprio sob medida 👌
-- Gestão de dados (Redux, Context API, IndexedDB, SQLite, etc)
+-Free Dictionary API (Ádui e descrição)
 
-Atente-se, ao desenvolver a aplicação mobile, para conceitos de usabilidade e adeque a interface com elementos visuais para os usuários do seu sistema.
+DESCRIÇÃO DO PROCESSO:
 
-#### Tecnologias (Back-End):
-- Firebase, Supabase, etc
+Resolvi utilizar React Native, Expo e Gluestacks(Previamente NativeBase) devido a minha familiaridade com a tecnologia, já fiz um APP utilizando esses recursos e consegui ter um desempenho satisfatório no último projeto. Comecei por criar as paginas iniciais, index.tsx, favoritos.tsx e historico.tsx, percebi que nas 3 paginas teriam informacoes muito parecidas no cabeçalho entao criei um componente separado para apenas importas nessas paginas, nesse componente utilizei 3 botoes para navegar entre as paginas e e colocar um titulo a elas.
+A partir daí criei os servicós de palavras, favoritos e historico, são as paginas ondem contem a logica de salvar no SecureStore, de pegar da API as palavras, de salvar as palavras tanto em uma chave de favoritos quanto em uma chave de historico e a partir dessas chaves, cada uma ser chamada respectivamente nas paginas.
+A grande maioria das palavras na lista que foi passada no antigo README nao possui definicao no Free Dictionary APi entao eu tratei um erro e envio para a tela do usuario avisando que na API essa palavra nao existe.
 
-#### Organização:
-- Aplicação de padrões Clean Code
-- Validação de chamadas assíncronas para evitar travamentos
+INSTALAÇÃO:
 
-### Modelo de Dados:
+Eu buildei um APK do aplicativo para ficar mais fácil os teste e assim conseguir avaliar melhor meu trabalho.
 
-Conforme indicado na documentação da API, a API retorna as informações de uma palavra, tais como etimologia, sinônimos, exemplos de uso, etc. Utilize os campos indicados na documentação dos endpoints para obter os dados necessários.
- 
-### Front-End:
+https://expo.dev/accounts/edudedo/projects/Dicionario-Mobile/builds/a3a6c945-77c4-43ad-9f46-55dfe23088a5
 
-Nessa etapa você deverá desenvolver uma aplicação móvel nativa ou hibrida para consumir a API do desafio.
+Basta acessar esse link e instalar o APK para rodar em seus dispositivo.
 
-**Obrigatório 1** - Você deverá atender aos seguintes casos de uso:
+COMO USAR O APLICATIVO:
+Na tela inicial uma lista de palavras irá aparecer, cada palavra tem um campo clicavél que ao clicar aparecerá na tela um Modal com as definições da palavra, ao deslizar a tela para baixo você consegue acessar mais palavras a medida que for carregando.
+Ouvir a pronúncia: No modal de detalhes, clique no botão de TOCAR.
+Salvar favoritos: No modal de detalhes, clique em "Salvar como Favorito".
+Acessar favoritos: Vá até a página de favoritos para visualizar as palavras salvas.
+Histórico: As palavras clicadas na tela inicial aparecem automaticamente na página de histórico.
 
-- Como usuário, devo ser capaz de visualizar uma lista de palavras com rolagem infinita
-- Como usuário, devo ser capaz de visualizar uma palavra, significados e a fonética
-- Como usuário, devo ser capaz de salvar a palavra como favorito
-- Como usuário, devo ser capaz de remover a palavra como favorito
-- Como usuário, devo ser capaz de visitar uma lista com as palavras que já vi anteriormente
-
-A API não possui endpoint com a lista de palavras. Essa lista pode ser carregada em memória ou ser salva em banco de dados local ou remoto (por exemplo, com Firebase). Será necessário usar o [arquivo existente dentro do projeto no Github](https://github.com/dwyl/english-words/blob/master/words_dictionary.json).
-
-**Obrigatório 2** - Salvar em cache o resultado das requisições, para agilizar a resposta em caso de buscas com parâmetros repetidos.
-
-**Obrigatório 3** - Seguir o wireframe para a página de listagem dos dados. Pode-se alterar a posição dos itens, mantendo as funcionalidades solicitadas.
-
-<img src="./img/wireframe.png" width="100%" />
-
-**Diferencial 1** - Implementar um tocador de audio utilizando, por exemplo, https://responsivevoice.org/api ou recursos nativos;
-
-**Diferencial 2** - Utilizar alguma ferramenta de Injeção de Dependência;
-
-**Diferencial 3** - Escrever Unit Tests ou E2E Test. Escolher a melhor abordagem e biblioteca;
-
-**Diferencial 4** - Implementar login com usuário e senha e associar os favoritos e histórico ao ID do usuário, salvando essa informação em banco de dados local ou remoto
-## Readme do Repositório
-
-- Deve conter o título do projeto
-- Uma descrição sobre o projeto em frase
-- Deve conter uma lista com linguagem, framework e/ou tecnologias usadas
-- Como instalar e usar o projeto (instruções)
-- Não esqueça o [.gitignore](https://www.toptal.com/developers/gitignore)
-- Se está usando github pessoal, referencie que é um challenge by coodesh:  
-
->  This is a challenge by [Coodesh](https://coodesh.com/)
-
-## Finalização e Instruções para a Apresentação
-
-1. Adicione o link do repositório com a sua solução no teste
-2. Adicione o link da apresentação do seu projeto no README.md.
-3. Verifique se o Readme está bom e faça o commit final em seu repositório;
-4. Envie e aguarde as instruções para seguir. Sucesso e boa sorte. =)
-
-## Suporte
-
-Use a [nossa comunidade](https://discord.gg/rdXbEvjsWu) para tirar dúvidas sobre o processo ou envie uma mensagem diretamente a um especialista no chat da plataforma. 
->>>>>>> 7658be6cc8cbea118f0a7a995b6566bad9140001
+Challenge by Coodesh
+Este projeto foi desenvolvido como parte de um desafio técnico para a Coodesh. Agradeço a oportunidade de demonstrar minhas habilidades e aprender ainda mais ao longo do processo
