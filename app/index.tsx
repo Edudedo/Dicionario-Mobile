@@ -8,6 +8,7 @@ import { Spinner } from "@/components/ui/spinner";
 import { getPalavras } from "@/services/palavrasService";
 import ModalPalavra from "../components/ModalPalavra"
 import { adicionarFavorito } from "@/services/favoritosService";
+import { adicionarHistorico } from "@/services/historicoService";
 
 
 
@@ -71,13 +72,15 @@ export default function Lista() {
     try {
       const resposta = await getPalavras(palavra)
       
-      
       setPalavraData(resposta)
+      await adicionarHistorico(palavra);
       setModalAberto(true)
+      
     } catch (erro) {
       console.error("Erro ao renderizar a definicao da palavra:", erro)
     }
   }
+
   const apertarPalavra = (palavra: string) => {
     setPalavraSelecionada(palavra);
     Definicao(palavra);
