@@ -7,7 +7,6 @@ import axios from "axios";
 import { Spinner } from "@/components/ui/spinner";
 import { getPalavras } from "@/services/palavrasService";
 import ModalPalavra from "../components/ModalPalavra"
-import * as SecureStore from 'expo-secure-store'
 import { adicionarFavorito } from "@/services/favoritosService";
 
 
@@ -97,7 +96,9 @@ export default function Lista() {
 
 
   return (
-    <Box style={{ flex: 1, marginTop: 10 }}>
+    <Box style={{flex: 1,
+      padding: 20,
+      backgroundColor: "#fff",}}>
       <Cabecalho texto="Lista de Palavras" />
 
 
