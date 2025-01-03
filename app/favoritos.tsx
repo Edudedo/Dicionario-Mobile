@@ -35,12 +35,18 @@ export default function Favoritos() {
           data={favoritos}
           keyExtractor={(item, index) => index.toString()}
           renderItem={({ item }) => (
-            <View >
-              <Text >{item}</Text>
+            <View style={{flexDirection: "row",
+                justifyContent: "space-between",
+                alignItems: "center",
+                padding: 10,
+                marginVertical: 5,
+                backgroundColor: "#f9f9f9",
+                borderRadius: 5,}}>
+              <Text style={{fontSize: 16}} >{item}</Text>
               <TouchableOpacity
                 onPress={() => removerPalavra(item)}
               >
-                <Text >Remover</Text>
+                <Text style={{    backgroundColor: "#215376", padding: 5, borderRadius: 5, color: "white"}} >Remover</Text>
               </TouchableOpacity>
             </View>
           )}
