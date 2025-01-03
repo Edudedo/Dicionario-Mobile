@@ -60,6 +60,7 @@ export default function ModalPalavra({
         width: "90%",
         borderRadius: 10,
         padding: 10,
+        alignSelf: "center"
       }}>
         <ModalHeader>
           <Text style={{ fontSize: 18, fontWeight: "bold" }}>
