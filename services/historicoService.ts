@@ -4,13 +4,13 @@ const tokenHistorico = "palavrasVistas"
 
 export const getHistorico = async (): Promise<string[]> => {
     try {
-      const historico = await SecureStore.getItemAsync(tokenHistorico);
-      return historico ? JSON.parse(historico) : []; 
+        const historico = await SecureStore.getItemAsync(tokenHistorico);
+        return historico ? JSON.parse(historico) : [];
     } catch (erro) {
-      console.error("Erro ao buscar histórico:", erro);
-      return [];
+        console.error("Erro ao buscar histórico:", erro);
+        return [];
     }
-  };
+};
 
 export const adicionarHistorico = async (palavra: string) => {
     try {

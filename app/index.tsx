@@ -1,7 +1,7 @@
 import { Box } from "@/components/ui/box";
 import Cabecalho from "@/components/Cabecalho";
 import { Text } from "@/components/ui/text";
-import {  Alert, FlatList, TouchableOpacity} from "react-native";
+import { Alert, FlatList, TouchableOpacity } from "react-native";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { Spinner } from "@/components/ui/spinner";
@@ -17,7 +17,7 @@ export default function Lista() {
 
   const [palavras, setPalavras] = useState<string[]>([]);
   const [palavrasVistas, setPalavrasVistas] = useState<string[]>([]);
-  const [loading, setLoading] = useState(true); 
+  const [loading, setLoading] = useState(true);
   const [loadingPagina, setLoadingPagina] = useState(false);
   const [pagina, setPagina] = useState(1)
   const palavrasPorPagina = 100
@@ -33,7 +33,7 @@ export default function Lista() {
       } catch (erro) {
         console.error("Erro ao buscar as palavras:", erro);
         setLoading(false)
-      } 
+      }
     }
 
     carregarPrimeiraPagina()
@@ -71,11 +71,11 @@ export default function Lista() {
   const Definicao = async (palavra: string) => {
     try {
       const resposta = await getPalavras(palavra)
-      
+
       setPalavraData(resposta)
       await adicionarHistorico(palavra);
       setModalAberto(true)
-      
+
     } catch (erro) {
       console.error("Erro ao renderizar a definicao da palavra:", erro)
     }
@@ -87,21 +87,23 @@ export default function Lista() {
   }
 
   const salvarNosFavoritos = async (palavra: string) => {
-      await adicionarFavorito(palavra);
-      Alert.alert(
-                      "Palavra favoritada com sucesso!", 
-                      "Conferir na página de favoritos", 
-                      [
-                        { text: "OK", onPress: () => console.log("OK Pressed") },
-                      ]
-                    );
+    await adicionarFavorito(palavra);
+    Alert.alert(
+      "Palavra favoritada com sucesso!",
+      "Conferir na página de favoritos",
+      [
+        { text: "OK", onPress: () => console.log("OK Pressed") },
+      ]
+    );
   }
 
 
   return (
-    <Box style={{flex: 1,
+    <Box style={{
+      flex: 1,
       padding: 20,
-      backgroundColor: "#fff",}}>
+      backgroundColor: "#fff",
+    }}>
       <Cabecalho texto="Lista de Palavras" />
 
 
@@ -139,10 +141,10 @@ export default function Lista() {
               <Text style={{ fontSize: 16 }}>{item}</Text>
             </TouchableOpacity>
           )}
-          numColumns={3} 
+          numColumns={3}
           contentContainerStyle={{ padding: 10 }}
-          onEndReached={carregarMaisPalavras} 
-          onEndReachedThreshold={0.5} 
+          onEndReached={carregarMaisPalavras}
+          onEndReachedThreshold={0.5}
           ListFooterComponent={
             loadingPagina ? (
               <Box
@@ -158,16 +160,16 @@ export default function Lista() {
               </Box>
             ) : null
           }
-          initialNumToRender={20} 
-          maxToRenderPerBatch={10} 
-          windowSize={5} 
+          initialNumToRender={20}
+          maxToRenderPerBatch={10}
+          windowSize={5}
         />
       )}
       <ModalPalavra
-      isOpen={modalAberto}
-      onClose={() => setModalAberto(false)}
-      palavraData={palavraData}
-      salvarFavoritos={salvarNosFavoritos}
+        isOpen={modalAberto}
+        onClose={() => setModalAberto(false)}
+        palavraData={palavraData}
+        salvarFavoritos={salvarNosFavoritos}
       >
       </ModalPalavra>
     </Box>

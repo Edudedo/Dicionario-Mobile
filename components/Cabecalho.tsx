@@ -5,7 +5,7 @@ import { HStack } from "@/components/ui/hstack";
 import { Text } from "@/components/ui/text";
 import { useToast } from "@/components/ui/toast";
 import { Link, useRouter } from "expo-router";
-import {  ScrollView, View } from "react-native";
+import { ScrollView, View } from "react-native";
 
 
 interface TextoPersonalizado {
@@ -25,34 +25,34 @@ const Cabecalho: React.FC<TextoPersonalizado> = ({ texto }) => {
   const irHistorico = () => {
     router.push("/historico")
   }
-    return (
-        <VStack>
-        <HStack space= "xl" style={{justifyContent: "center"}}>
+  return (
+    <VStack>
+      <HStack space="xl" style={{ justifyContent: "center" }}>
 
-      <Button onPress={irLista} size="xl" style={{ borderRadius: 15, width: "33%", backgroundColor: "#215376" }}>
-        <ButtonText>
-          Lista
-        </ButtonText>
-      </Button>
+        <Button onPress={irLista} size="xl" style={{ borderRadius: 15, width: "33%", backgroundColor: "#215376" }}>
+          <ButtonText>
+            Lista
+          </ButtonText>
+        </Button>
 
-      <Button onPress={irHistorico} size="xl" style={{borderRadius: 15, width: "33%", backgroundColor: "#215376"}}>
-        <ButtonText>
-          Histórico
-        </ButtonText>
-      </Button>
-      
-      
-      <Button onPress={irFavoritos} size="xl" style={{borderRadius: 15, width: "33%", backgroundColor: "#215376"}}>
-        <ButtonText>
-          Favoritos
-        </ButtonText>
-      </Button>
-      
-    </HStack>
-    
-    <Text className="text-[#215376] text-4xl text-center mt-6" >{texto}</Text>
+        <Button onPress={irHistorico} size="xl" style={{ borderRadius: 15, width: "33%", backgroundColor: "#215376" }}>
+          <ButtonText>
+            Histórico
+          </ButtonText>
+        </Button>
+
+
+        <Button onPress={irFavoritos} size="xl" style={{ borderRadius: 15, width: "33%", backgroundColor: "#215376" }}>
+          <ButtonText>
+            Favoritos
+          </ButtonText>
+        </Button>
+
+      </HStack>
+
+      <Text className="text-[#215376] text-4xl text-center mt-6" >{texto}</Text>
     </VStack>
-    )
+  )
 }
 
 export default Cabecalho;
