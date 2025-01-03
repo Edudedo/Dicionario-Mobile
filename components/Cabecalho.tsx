@@ -27,22 +27,22 @@ const Cabecalho: React.FC<TextoPersonalizado> = ({ texto }) => {
   }
     return (
         <VStack>
-        <HStack space= "4xl">
+        <HStack space= "xl" style={{justifyContent: "center"}}>
 
-      <Button onPress={irLista} size="xl" style={{ borderRadius: 15, width: "25%", marginLeft: 5, backgroundColor: "#215376" }}>
+      <Button onPress={irLista} size="xl" style={{ borderRadius: 15, width: "33%", backgroundColor: "#215376" }}>
         <ButtonText>
           Lista
         </ButtonText>
       </Button>
 
-      <Button onPress={irHistorico} size="xl" style={{borderRadius: 15, width: "30%", backgroundColor: "#215376"}}>
+      <Button onPress={irHistorico} size="xl" style={{borderRadius: 15, width: "33%", backgroundColor: "#215376"}}>
         <ButtonText>
           Histórico
         </ButtonText>
       </Button>
       
       
-      <Button onPress={irFavoritos} size="xl" style={{borderRadius: 15, width: "30%", backgroundColor: "#215376"}}>
+      <Button onPress={irFavoritos} size="xl" style={{borderRadius: 15, width: "33%", backgroundColor: "#215376"}}>
         <ButtonText>
           Favoritos
         </ButtonText>
