@@ -2,7 +2,9 @@ import { Modal, ModalBackdrop, ModalContent, ModalHeader, ModalCloseButton, Moda
 import { Button, ButtonText } from './ui/button';
 import { Text } from './ui/text';
 import { ScrollView } from 'react-native';
-import React from 'react';
+import React, { useState } from 'react';
+import { Audio } from "expo-av";
+
 
 interface ModalPalavraProps {
   isOpen: boolean;
@@ -19,6 +21,35 @@ export default function ModalPalavra({
 }: ModalPalavraProps) {
   if (!palavraData || palavraData.length === 0) {
     return null;
+  }
+
+  const [audio, setAudio] = useState<Audio.Sound | null>(null);
+  const [tocando, setTocando] = useState(false)
+
+  const tocarAudio = async (audioUrl: string) => {
+    try {
+      if (audio) {
+        await audio.stopAsync();
+        await audio.unloadAsync();
+        setAudio(null);
+        setTocando(false)
+      }
+
+      const { sound: newSound } = await Audio.Sound.createAsync({ uri: audioUrl });
+      setAudio(newSound);
+      setTocando(true)
+
+      await newSound.playAsync();
+
+      newSound.setOnPlaybackStatusUpdate((status) => {
+        if (status.isLoaded && status.didJustFinish) {
+          setTocando(false);
+          setAudio(null)
+        }
+      });
+    } catch (erro) {
+      console.error("Erro ao tocar áudio:", erro)
+    }
   }
 
   return (
@@ -50,15 +81,17 @@ export default function ModalPalavra({
                   <Text key={i}>
                     {phonetic.text}{" "}
                     {phonetic.audio ? (
-                      <Text
-                        style={{ color: "blue" }}
-                        onPress={() => {
-
-                          console.log("Reproduzir áudio:", phonetic.audio);
+                      <Button
+                        style={{
+                          backgroundColor: "#215376",
+                          width: "30%",
+                          height: 30,
+                          marginLeft: 10,
                         }}
+                        onPress={() => tocarAudio(phonetic.audio)}
                       >
-                        🔊
-                      </Text>
+                        <ButtonText>{tocando ? "Tocando" : "Tocar"}</ButtonText>
+                      </Button>
                     ) : null}
                   </Text>
                 ))}
